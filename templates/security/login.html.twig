@@ -1,0 +1,64 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Log in!{% endblock %}
+
+{% block body %}
+    <div class="font-sans">
+        <div class="relative min-h-screen flex flex-col sm:justify-center items-center bg-gray-100 py-10">
+            <div class="relative sm:max-w-xl w-full"> <!-- Increased max width -->
+                <div class="card bg-blue-400 shadow-lg w-full h-full rounded-3xl absolute transform -rotate-6"></div>
+                <div class="card bg-red-400 shadow-lg w-full h-full rounded-3xl absolute transform rotate-6"></div>
+                <div class="relative w-full rounded-3xl px-10 py-8 bg-gray-100 shadow-md"> <!-- Increased padding -->
+                    <label for="" class="block mt-3 text-2xl text-gray-700 text-center font-bold"> <!-- Increased font size -->
+                        Login
+                    </label>
+                    <form method="post" class="mt-12">
+                        {% if error %}
+                            <div class="text-red-500 text-center mb-6 text-lg">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                        {% endif %}
+
+                        {% if app.user %}
+                            <div class="mb-6 text-center text-lg">
+                                You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}" class="text-blue-500 underline">Logout</a>
+                            </div>
+                        {% endif %}
+
+                        <div class="mb-6">
+                            <input type="email" value="{{ last_username }}" name="_username" id="username" placeholder="Correo electronico" class="mt-1 block w-full border-none bg-gray-100 h-16 rounded-xl shadow-lg hover:bg-blue-100 focus:bg-blue-100 focus:ring-0 text-lg" autocomplete="email" required autofocus> <!-- Increased height -->
+                        </div>
+
+                        <div class="mb-6">
+                            <input type="password" name="_password" id="password" placeholder="Contraseña" class="mt-1 block w-full border-none bg-gray-100 h-16 rounded-xl shadow-lg hover:bg-blue-100 focus:bg-blue-100 focus:ring-0 text-lg" autocomplete="current-password" required> <!-- Increased height -->
+                        </div>
+
+                        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+                        <div class="mb-6 flex items-center justify-between">
+                            <label for="_remember_me" class="inline-flex items-center cursor-pointer">
+                                <input id="_remember_me" type="checkbox" name="_remember_me" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                                <span class="ml-2 text-lg text-gray-600">Recuerdame</span>
+                            </label>
+
+                            <a class="underline text-lg text-gray-600 hover:text-gray-900" href="#">¿Olvidó su contraseña?</a>
+                        </div>
+
+                        <div class="mb-6">
+                            <button class="bg-blue-500 w-full py-5 rounded-xl text-white shadow-xl hover:shadow-inner focus:outline-none transition duration-500 ease-in-out transform hover:-translate-x hover:scale-105 text-lg"> <!-- Increased padding -->
+                                Login
+                            </button>
+                        </div>
+
+                        <div class="mt-8">
+                            <div class="flex justify-center items-center">
+                                <label class="mr-2 text-lg">¿Eres nuevo?</label>
+                                <a href="#" class="text-blue-500 text-lg transition duration-500 ease-in-out transform hover:-translate-x hover:scale-105">
+                                    Crea una cuenta
+                                </a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
