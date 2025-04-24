@@ -23,8 +23,8 @@ class EmploymentRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
-    
-    public function findOneById(int $id): ?Employment
+
+    public function findOneById(string $id): ?Employment
     {
         return $this->createQueryBuilder('e')
             ->andWhere('e.id = :id')

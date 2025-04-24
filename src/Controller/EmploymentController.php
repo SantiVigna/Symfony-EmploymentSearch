@@ -10,7 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 final class EmploymentController extends AbstractController
 {
-    #[Route('/employments', name: 'employment_index', methods: ['GET'])]
+    #[Route('/', name: 'employment_index', methods: ['GET'])]
     public function index(EntityManagerInterface $entityManager): Response
     {
         $employments = $entityManager->getRepository(Employment::class)->findAll();
@@ -19,13 +19,10 @@ final class EmploymentController extends AbstractController
         ]);
     }
 
-    #[Route('/employments/{id}', name: 'employment_show', methods: ['GET'])]
-    public function show(EntityManagerInterface $entityManager, int $id): Response
+    #[Route('/{id}', name: 'employment_show', methods: ['GET'])]
+    public function show(EntityManagerInterface $entityManager, string $id): Response
     {
         $employment = $entityManager->getRepository(Employment::class)->findOneById($id);
-        if (!$employment) {
-            throw $this->createNotFoundException('Employment not found');
-        }
         return $this->render('main/show.html.twig', [
             'employment' => $employment,
         ]);
