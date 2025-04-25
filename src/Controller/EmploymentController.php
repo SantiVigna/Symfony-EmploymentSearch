@@ -8,6 +8,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
+#[Route('/employment')]
 final class EmploymentController extends AbstractController
 {
     #[Route('/', name: 'employment_index', methods: ['GET'])]
